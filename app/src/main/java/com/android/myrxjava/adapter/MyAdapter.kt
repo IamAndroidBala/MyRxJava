@@ -8,6 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.myrxjava.R
 import kotlinx.android.synthetic.main.item_string.view.*
 
+/**
+ * Adapter to populate the data into Recyclerview
+ */
 class MyAdapter(private val mContext: Context) : RecyclerView.Adapter<MyAdapter.ViewHolder>() {
 
     private var mList = ArrayList<String>()

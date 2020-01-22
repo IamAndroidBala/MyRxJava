@@ -27,6 +27,9 @@ class ColorActivity  : AppCompatActivity() {
 
     }
 
+    /**
+     * Creating data source
+     */
     private fun createObservable() {
         val listObservable = Observable.just(getColorList())
         disposable = listObservable.subscribe { colors: List<String>? ->
@@ -34,6 +37,9 @@ class ColorActivity  : AppCompatActivity() {
             }
     }
 
+    /**
+     * Initialse the UI
+     */
     private fun configureLayout() {
 
         setContentView(R.layout.activity_colors)
@@ -58,6 +64,9 @@ class ColorActivity  : AppCompatActivity() {
         return colors
     }
 
+    /**
+     * Destroying the subscriber
+     */
     override fun onStop() {
         super.onStop()
         if (disposable != null && !disposable!!.isDisposed) {

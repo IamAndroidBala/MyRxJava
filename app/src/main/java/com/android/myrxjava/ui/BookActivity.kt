@@ -33,6 +33,12 @@ class BookActivity : AppCompatActivity() {
 
     }
 
+    /**
+     * Creating Observable to get the result
+     * Adding subscriber to listen the result
+     * Once the result emitted and subscriber will get and display in UI
+     */
+
     private fun createObservable() {
 
         val booksObservable = Observable.fromCallable { restClient!!.favoriteBooks }
@@ -44,6 +50,10 @@ class BookActivity : AppCompatActivity() {
 
     }
 
+    /**
+     * Destroy the subscriber for clear memory
+     */
+
     override fun onDestroy() {
         super.onDestroy()
         if (bookSubscription != null && !bookSubscription!!.isDisposed) {
@@ -51,11 +61,19 @@ class BookActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Send data to adapter and populate on UI
+     */
+
     private fun displayBooks(books: ArrayList<String>) {
         stringAdapter!!.setResults(books)
         progressBar!!.visibility = View.GONE
         booksRecyclerView!!.visibility = View.VISIBLE
     }
+
+    /**
+     * Initialise views
+     */
 
     private fun configureLayout() {
 
@@ -71,6 +89,10 @@ class BookActivity : AppCompatActivity() {
         booksRecyclerView!!.adapter = stringAdapter
 
     }
+
+    /**
+     * Destroy the subscriber for clear memory
+     */
 
     override fun onStop() {
         super.onStop()

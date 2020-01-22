@@ -12,6 +12,7 @@ import java.util.List;
  * It simulates making blocking calls to an REST endpoint.
  */
 public class RestClient {
+
     private Context mContext;
 
     public RestClient(Context context) {
@@ -19,12 +20,12 @@ public class RestClient {
     }
 
     public List<String> getFavoriteBooks() {
-        SystemClock.sleep(8000);// "Simulate" the delay of network.
+        SystemClock.sleep(5000);// "Simulate" the delay of network.
         return createBooks();
     }
 
     public List<String> getFavoriteBooksWithException() {
-        SystemClock.sleep(8000);// "Simulate" the delay of network.
+        SystemClock.sleep(5000);// "Simulate" the delay of network.
         throw new RuntimeException("Failed to load");
     }
 
@@ -44,5 +45,6 @@ public class RestClient {
         books.add("Other book 6");
         return books;
     }
+
 }
 

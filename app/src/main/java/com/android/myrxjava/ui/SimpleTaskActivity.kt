@@ -18,6 +18,11 @@ class SimpleTaskActivity : AppCompatActivity() {
     var disposable: CompositeDisposable? = CompositeDisposable()
     var value = 0
 
+    /**
+     * Creating data source for testing
+     * this will emit data after 4 sec
+     */
+
     private val serverDownloadObservable = Observable.create { emitter: ObservableEmitter<Int> ->
             SystemClock.sleep(4000)
             emitter.onNext(126)
@@ -26,8 +31,10 @@ class SimpleTaskActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_simple)
         val view = findViewById<View>(R.id.button)
+
         view.setOnClickListener { v: View ->
             v.isEnabled = false // disables the button until execution has finished
             val subscribe = serverDownloadObservable.observeOn(
@@ -39,12 +46,20 @@ class SimpleTaskActivity : AppCompatActivity() {
                 }
             disposable!!.add(subscribe)
         }
+
     }
 
+    /**
+     * Update the UI once getting the result
+     */
     private fun updateTheUserInterface(integer: Int) {
-        val view = findViewById<View>(R.id.resultView) as TextView
+        val view  = findViewById<View>(R.id.resultView) as TextView
         view.text = integer.toString()
     }
+
+    /**
+     * Destroy the subscribers
+     */
 
     override fun onStop() {
         super.onStop()
