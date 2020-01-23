@@ -15,7 +15,7 @@ import io.reactivex.schedulers.Schedulers
 
 class SimpleTaskActivity : AppCompatActivity() {
 
-    var disposable: CompositeDisposable? = CompositeDisposable()
+    var disposable : CompositeDisposable? = CompositeDisposable()
     var value = 0
 
     /**
@@ -23,7 +23,7 @@ class SimpleTaskActivity : AppCompatActivity() {
      * this will emit data after 4 sec
      */
 
-    private val serverDownloadObservable = Observable.create { emitter: ObservableEmitter<Int> ->
+    private val mObservable = Observable.create { emitter: ObservableEmitter<Int> ->
             SystemClock.sleep(4000)
             emitter.onNext(126)
             emitter.onComplete()
@@ -33,18 +33,21 @@ class SimpleTaskActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_simple)
+
         val view = findViewById<View>(R.id.button)
 
         view.setOnClickListener { v: View ->
+
             v.isEnabled = false // disables the button until execution has finished
-            val subscribe = serverDownloadObservable.observeOn(
-                AndroidSchedulers.mainThread()
-            ).subscribeOn(Schedulers.io())
+
+            val subscribe = mObservable.observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io())
                 .subscribe { integer: Int ->
                     updateTheUserInterface(integer) // this methods updates the ui
                     v.isEnabled = true // enables it again
                 }
+
             disposable!!.add(subscribe)
+
         }
 
     }

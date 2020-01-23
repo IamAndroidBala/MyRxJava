@@ -41,6 +41,15 @@ class HomeActivity : AppCompatActivity() {
             )
         }
 
+        btnAlbum.setOnClickListener {
+            startActivity(
+                Intent(
+                    applicationContext,
+                    AlbumListActivity::class.java
+                )
+            )
+        }
+
     }
 
 }

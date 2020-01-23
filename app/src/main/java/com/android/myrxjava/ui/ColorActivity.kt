@@ -32,9 +32,10 @@ class ColorActivity  : AppCompatActivity() {
      */
     private fun createObservable() {
         val listObservable = Observable.just(getColorList())
-        disposable = listObservable.subscribe { colors: List<String>? ->
-                simpleStringAdapter!!.setResults(colors as ArrayList<String>)
-            }
+
+        disposable = listObservable.subscribe { colors: ArrayList<String> ->
+            simpleStringAdapter!!.setResults(colors)
+        }
     }
 
     /**
@@ -54,7 +55,7 @@ class ColorActivity  : AppCompatActivity() {
 
     }
 
-    private fun getColorList(): List<String> {
+    private fun getColorList(): ArrayList<String> {
         val colors = ArrayList<String>()
         colors.add("red")
         colors.add("green")

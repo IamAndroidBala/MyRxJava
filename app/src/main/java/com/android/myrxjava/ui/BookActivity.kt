@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.myrxjava.R
 import com.android.myrxjava.adapter.MyAdapter
-import com.android.myrxjava.networking.RestClient
+import com.android.myrxjava.networking.RestApiClient
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -19,14 +19,14 @@ class BookActivity : AppCompatActivity() {
 
     private var progressBar         : ProgressBar? = null
     private var stringAdapter       : MyAdapter? = null
-    private var restClient          : RestClient? = null
+    private var restClient          : RestApiClient? = null
     private var bookSubscription    : Disposable? = null
     private var booksRecyclerView   : RecyclerView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        restClient = RestClient(this)
+        restClient = RestApiClient()
 
         configureLayout()
         createObservable()
@@ -41,7 +41,7 @@ class BookActivity : AppCompatActivity() {
 
     private fun createObservable() {
 
-        val booksObservable = Observable.fromCallable { restClient!!.favoriteBooks }
+        val booksObservable = Observable.fromCallable { restClient!!.getFavoriteBooks() }
 
         bookSubscription = booksObservable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe { strings: List<String> ->

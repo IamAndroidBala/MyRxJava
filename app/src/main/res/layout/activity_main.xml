@@ -27,4 +27,12 @@
         android:textSize="@dimen/text_heading"
         android:text="@string/colors" />
 
+
+    <Button
+        android:id="@+id/btnAlbum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_heading"
+        android:text="@string/album" />
+
 </LinearLayout>

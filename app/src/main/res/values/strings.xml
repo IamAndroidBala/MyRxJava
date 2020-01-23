@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">My Application</string>
     <string name="simple">  Simple Task</string>
-    <string name="books">  Books </string>
+    <string name="books">   Books </string>
     <string name="colors">  Colors </string>
+    <string name="album">   Album</string>
 </resources>
